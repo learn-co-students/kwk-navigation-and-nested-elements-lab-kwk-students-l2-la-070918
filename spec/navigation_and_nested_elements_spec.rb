@@ -3,11 +3,7 @@ RSpec.describe 'Navigation and Nested Elements' do
     expect(parsed_html.children.first).to be_html5_dtd, "Make sure to include <!DOCTYPE html> in your file"
   end
 
-  it 'has a top-level <html> tag to enclose the document' do
-    expect(parsed_html.child.name).to eq('html'), "All well-structured HTML documents need an <html> tag"
 
-    expect(html_file_contents).to include('</html>'), "Don't forget the closing </html> tag!"
-  end
 
   context 'within <html>' do
     it 'contains a <head> tag to enclose the header' do
@@ -89,15 +85,5 @@ RSpec.describe 'Navigation and Nested Elements' do
     end
   end
 
-  context 'w3c validation' do
-    it 'is a valid w3c document' do
-      validator = W3CValidators::NuValidator.new
-      html = File.read('./index.html')
-      results = validator.validate_text(html)
-
-      error_messages = "Expected a valid w3c document but got:\n#{results.errors.collect{|e| e.to_s}.join("\n")}"
-
-      expect(results.errors).to be_empty, error_messages
-    end
-  end
+ 
 end
